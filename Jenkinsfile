@@ -21,8 +21,8 @@ pipeline {
 
         stage('Docker Build & Push') {
             steps {
-                sh "docker build -t anurag9507/scientific-calculator:1.0"
-                sh "docker push anurag9507/scientific-calculator:1.0"
+                sh "docker build -t ${DOCKERHUB_USER}/${IMAGE_NAME}:1.0 ."
+                sh "docker push ${DOCKERHUB_USER}/${IMAGE_NAME}:1.0"
             }
         }
         
