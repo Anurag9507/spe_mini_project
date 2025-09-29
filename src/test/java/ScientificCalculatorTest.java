@@ -11,6 +11,12 @@ public class ScientificCalculatorTest
     }
 
     @Test
+    public void testSqrt2()
+    {
+        assertEquals(4.0,ScientificCalculator.sqrt(16),0.0001);
+    }
+
+    @Test
     public void testFactorial()
     {
         assertEquals(720,ScientificCalculator.factorial(6));
