@@ -21,8 +21,8 @@ pipeline {
 
         stage('Docker Build & Push') {
             steps {
-                sh "docker build -t anurag9507/scientific-calculator"
-                sh "docker push anurag9507/scientific-calculator"
+                sh "docker build -t anurag9507/scientific-calculator:1.0"
+                sh "docker push anurag9507/scientific-calculator:1.0"
             }
         }
         
