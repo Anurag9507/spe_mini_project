@@ -1,1 +1,2 @@
-target/
+target/*
+!target/scientific-calculator-1.0-SNAPSHOT.ja
