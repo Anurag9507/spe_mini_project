@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKERHUB_USER = 'anurag9507'
         IMAGE_NAME = 'scientific-calculator'
-        IMAGE_TAG = '1.0'
+        IMAGE_TAG = 'latest'
         DOCKER_IMAGE = "${DOCKERHUB_USER}/${IMAGE_NAME}:${IMAGE_TAG}"
     }
 

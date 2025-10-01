@@ -12,14 +12,14 @@
       when: ansible_os_family == "Debian"
 
     - name: Pull latest Docker image 
-      shell: docker pull anurag9507/scientific-calculator:1.0
+      shell: docker pull anurag9507/scientific-calculator:latest
 
     - name: Remove old container if exists
       shell: docker rm -f scientific-calculator
       ignore_errors: true
 
     - name: Run Calculator container in detached mode
-      shell: docker run -dit --name scientific-calculator anurag9507/scientific-calculator:1.0
+      shell: docker run -dit --name scientific-calculator anurag9507/scientific-calculator:latest
 
     - name: Show running containers
       shell: docker ps
