@@ -5,23 +5,25 @@ public class ScientificCalculator
     public static double sqrt(double x)
     {
         if(x<0)
-        	throw new IllegalArgumentException("Input for square root must be >= 0");
+        	throw new IllegalArgumentException("Square root for negative numbers is undefined");
         return Math.sqrt(x);
     }
 
-    public static long factorial(int n)
+    public static long factorial(double n)
     {
         if (n<0)
-            throw new IllegalArgumentException("Input for factorial must be >= 0");
+            throw new IllegalArgumentException("Factorial for negative numbers is undefined");
+        if(Math.floor(n)!=n)
+            throw new IllegalArgumentException("Factorial for fractional numbers is undefined");
         long result=1;
         for(int i=2;i<=n;i++)
-            result*=i;
+           result*=i;
         return result;
     }
     public static double natural_log(double x)
     {
         if(x<=0)
-            throw new IllegalArgumentException("Input for natural logarithm must be > 0");
+            throw new IllegalArgumentException("Natural logarithm for negative numbers or zero is undefined");
         return Math.log(x);
     }
     public static double power(double base,double exponent)
@@ -53,7 +55,7 @@ public class ScientificCalculator
                         break;
                     case 2:
                         System.out.print("Enter integer: ");
-                        int y=sc.nextInt();
+                        double y=sc.nextDouble();
                         System.out.println(factorial(y));
                         break;
                     case 3:
