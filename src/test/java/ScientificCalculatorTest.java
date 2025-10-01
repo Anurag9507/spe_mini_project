@@ -14,7 +14,7 @@ public class ScientificCalculatorTest
     public void testSqrt2()
     {
         assertThrows(IllegalArgumentException.class,() -> ScientificCalculator.sqrt(-1));
-        assertThrows(IllegalArgumentException.class,() -> ScientificCalculator.sqrt(-10));
+        assertThrows(IllegalArgumentException.class,() -> ScientificCalculator.sqrt(-11));
     }
 
     @Test
