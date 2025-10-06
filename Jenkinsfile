@@ -9,27 +9,29 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main', url: 'https://github.com/Anurag9507/spe_mini_project.git'
-            }
-        }
-
         stage('Build & Test') {
             steps {
+                echo 'Application build and unit tests with Maven...'
                 sh 'mvn clean package test'
             }
         }
 
-        stage('Build & Push Docker Image') {
+        stage('Build Docker Image') {
+            steps {
+                echo "Building Docker image: ${env.DOCKER_IMAGE}..."
+                sh "docker build -t ${DOCKER_IMAGE} ."
+            }
+        }
+
+        stage('Push Docker Image to Docker Hub') {
             steps {
                 script {
+                    echo 'Docker Hub login and image push...'
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-creds',
-                                                      usernameVariable: 'DOCKER_USER',
-                                                      passwordVariable: 'DOCKER_PASS')]) {
+                                                     usernameVariable: 'DOCKER_USER',
+                                                     passwordVariable: 'DOCKER_PASS')]) {
                         
                         sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
-                        sh "docker build -t ${DOCKER_IMAGE} ."
                         sh "docker push ${DOCKER_IMAGE}"
                     }
                 }
@@ -38,6 +40,7 @@ pipeline {
 
         stage('Deploy with Ansible') {
             steps {
+                echo 'Deployment using Ansible playbook...'
                 sh 'ansible-playbook -i inventory.ini deploy.yml'
             }
         }
