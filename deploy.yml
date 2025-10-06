@@ -3,28 +3,28 @@
   hosts: anurag_pc
   become: true
 
+  vars:
+    image_name: "anurag9507/scientific-calculator:latest"
+    container_name: "scientific-calculator"
+
   tasks:
-    - name: Ensure Docker is installed
-      apt:
-        name: docker.io
-        state: present
-        update_cache: yes
-      when: ansible_os_family == "Debian"
+    - name: 1. Pull latest Docker image from Docker Hub
+      community.docker.docker_image:
+        name: "{{ image_name }}"
+        source: pull
 
-    - name: Pull latest Docker image 
-      shell: docker pull anurag9507/scientific-calculator:latest
+    - name: 2. Remove any old container if it exists
+      community.docker.docker_container:
+        name: "{{ container_name }}"
+        state: absent
 
-    - name: Remove old container if exists
-      shell: docker rm -f scientific-calculator
-      ignore_errors: true
-
-    - name: Run Calculator container in detached mode
-      shell: docker run -dit --name scientific-calculator anurag9507/scientific-calculator:latest
-
-    - name: Show running containers
-      shell: docker ps
-      register: docker_ps
-
-    - name: Print running container info
-      debug:
-        var: docker_ps.stdout
+    - name: 3. Run calculator in detached mode
+      community.docker.docker_container:
+        name: "{{ container_name }}"
+        image: "{{ image_name }}"
+        state: started
+        detach: yes 
+        interactive: yes
+        tty: yes
+        recreate: true
+        
