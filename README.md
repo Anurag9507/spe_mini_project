@@ -1,6 +1,6 @@
 # Scientific Calculator with DevOps
 
-This mini-project was developed as part of the **CS 816: Software Production Engineering** course.
+This mini-project was developed as part of the **CSE 816: Software Production Engineering** course.
 
 ## Steps to Run
 
