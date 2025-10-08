@@ -50,6 +50,7 @@ pipeline {
             mail to: 'anurag.ramaswamy.201344@gmail.com',
             subject: "Build #${env.BUILD_NUMBER} SUCCESS",
             body: """\
+            BUILD SUCCESS!
             Pipeline: ${env.JOB_NAME}
             Build Number: ${env.BUILD_NUMBER}
             URL: ${env.BUILD_URL}
@@ -59,6 +60,7 @@ pipeline {
             mail to: 'anurag.ramaswamy.201344@gmail.com',
             subject: "Build #${env.BUILD_NUMBER} FAILURE",
             body: """\
+            BUILD FAILURE!
             Pipeline: ${env.JOB_NAME}
             Build Number: ${env.BUILD_NUMBER}
             URL: ${env.BUILD_URL}
