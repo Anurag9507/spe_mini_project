@@ -45,4 +45,24 @@ pipeline {
             }
         }
     }
+    post {
+        success {
+            mail to: 'anurag.ramaswamy.201344@gmail.com',
+            subject: "Build #${env.BUILD_NUMBER} SUCCESS",
+            body: """\
+            Pipeline: ${env.JOB_NAME}
+            Build Number: ${env.BUILD_NUMBER}
+            URL: ${env.BUILD_URL}
+            """
+        }
+        failure {
+            mail to: 'anurag.ramaswamy.201344@gmail.com',
+            subject: "Build #${env.BUILD_NUMBER} FAILURE",
+            body: """\
+            Pipeline: ${env.JOB_NAME}
+            Build Number: ${env.BUILD_NUMBER}
+            URL: ${env.BUILD_URL}
+            """
+        }
+    }
 }
